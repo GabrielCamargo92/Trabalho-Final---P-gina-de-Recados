@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Login</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="shortcut icon" href="./images/school-icon-48-167477.png" type="image/x-icon">
+  </head>
+  <body>
+    <main>
+      <section class="telaEsquerda">
+        <div>
+          <!-- <img class="imgLogin" src="./images/img1.jpeg" alt="" /> -->
+        </div>
+      </section>
+
+      <section class="telaDireita">
+        <fieldset>
+          <form class="formulario" action="">
+            <div class="fullCard">
+              <div class="cardTop">       <!-- Contém a imagem do usuário (ícone) -->
+                <img class="userImag" src="./images/User.png" alt="Imagem do Usuário" />
+              <h2 class="title">Entrar no Sistema de Recados</h2>
+              </div>
+              
+              <div class="cardLogin"> <!--Contém os inputs para Usarname e Password-->
+                <div class="cardGroup"> 
+                  <label for="Username"></label>
+                  <input
+                    type="text"
+                    name="usuário"
+                    placeholder="Username"
+                    class="inputLogin"
+                    
+                  />
+
+                  <label for="Password"></label>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    class="inputPassword"
+                    
+                  />
+                </div>
+              </div>
+
+              <div class="cardBotton">
+                <div class="checkBox">
+                  <label> <input type="checkbox" id="checkbox"/>Lembre-me</label>
+                  <br>
+                </div>
+
+                <div class="botoes"> 
+                  <br>
+                  <button id="botaoEntrar" type="submit">Entrar</button>
+                  <br>
+                  <button id= "botaoCriarConta" type="button">Criar Conta</button>
+              </div>
+              </div>
+            
+            
+            </div>
+          </form>
+        </fieldset>
+      </section>
+    </main>
+    <script src="./paginaDeLogin.js"></script>
+  </body>
+</html>

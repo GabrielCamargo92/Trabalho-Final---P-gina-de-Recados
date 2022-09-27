@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./meusRecados.css" />
+    <link rel="shortcut icon" href="./images/school-icon-48-167477.png" type="image/x-icon">
+    <title>Meus Recados</title>
+  </head>
+  <body id="idBody">
+    <h2 class="titulo">Meus Recados</h2>
+    <div class="container">
+      <form action="" id="formulario">
+        <label for="Descrição"></label>
+        <input type="text" name="Descrição" placeholder="Descrição" id="descricao" />
+
+        <label for="Detalhamento"></label>
+        <input type="text" name="Detalhamento" placeholder="Detalhamento" id="detalhamento" />
+      </form>
+      
+      <p> <button onclick="adicionar() "class= "btnAdicionar">Adicionar</button></p>
+      <br>
+      <p><button onclick="limpar()" class="btnLimpar">Limpar</button></p>
+      
+    </div>
+
+    <section>
+      <table border="1">
+        <thead>
+            <tr>
+                <th class="barraHashtag">#</th>
+                <th class="barraDescricao">Descrição</th>
+                <th class="barraDetalhamento">Detalhamento</th>
+                <th class="barraAcoes">Ações</th>
+            </tr>
+        </thead>
+        <tbody id="lista">
+     
+        </tbody>
+    </table>
+
+    </section>
+
+    <footer> <a href="../PaginaDeLogin/index.html"> <button class="btnVoltarLogin">Tela de Login</button> </a> </footer>
+    <script src="./meusRecados.JS"></script>
+  </body>
+</html>

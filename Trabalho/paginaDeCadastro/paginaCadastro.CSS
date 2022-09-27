@@ -1,0 +1,111 @@
+body{
+    display: flex;
+    background-color: white;
+    height: 98vh;
+    background-image: linear-gradient(to right, blue, gold);
+    background-image: url(./images/sticky-note-collection-with-to-do-list.jpg);
+    background-size:contain;
+
+}
+main{
+    width: 100%;
+    height: 98vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.telaEsquerda{
+    display:flex;
+    width: 100%;
+    height: 98vh;
+}
+
+.imgLogin{
+    width: 100%;
+    height: 98vh;
+}
+
+.telaDireita{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.formulario{
+    width: 400px;
+    margin: auto;
+    /* padding-top: 50vh; */
+
+}
+
+.card{
+    
+    
+    border-radius: 5px;
+    padding: 10px;
+    
+}
+
+#titulo{
+    font-family: cursive;
+
+    box-shadow: 1px 1px 5px white;
+    /* background-color: white; */
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.cadastro{
+    box-shadow: 1px 1px 5px white;
+    /* background-color: white; */
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.password{
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    outline: 0;
+    padding: 5px;
+}
+#username{
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    outline: 0;
+    padding: 5px;
+}
+
+
+#divBtn{
+    display: block;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+#divBtn > button{
+    background-image: linear-gradient(to right, orange, black);
+    color: rgb(253, 253, 253);
+    width: 100%;
+    border-radius: 30px;
+    padding: 15px;
+    border: 0px;
+    outline: 0;
+    display: block;
+}
+
+#divBtn > button:hover{
+    background-image: linear-gradient(to left, rgb(0, 255, 47), rgb(14, 11, 14));
+}
+
