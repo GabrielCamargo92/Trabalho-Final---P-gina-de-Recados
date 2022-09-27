@@ -4,54 +4,22 @@ const inputDetalhamento = document.getElementById('detalhamento');
 const lista             = document.getElementById('lista');
 
 let buscaLocalStorage = () =>{
-    let buscaLocalStorage1 = JSON.parse(localStorage.getItem('recados'))|| [];
+    let buscaLocalStorage1 = JSON.parse(localStorage.getItem('recados')) || [];
     return buscaLocalStorage1
 }
-criaRecado()
 
-let recado = buscaLocalStorage();
+let recado = [];
 
-function adicionar() {
-    let data={
-        descricao: null,
-        detalhamento: null,
-        id: null
-    }
-    data.descricao    = inputDescricao.value;
-    data.detalhamento = inputDetalhamento.value;
-    data.id           = recado.length+1;  //gerarID   ?? gerarID(recado)
 
-    // validando a descrição 
-    if (data.descricao == null || data.descricao == '') {
-        alert("Por favor, informe a descrição do recado.");
-        inputDescricao.focus();
-        return;
-    }
+const LS=localStorage.getItem('recados') || []
 
-    const novaLinha = gerarRecado(data);
-    lista.appendChild(novaLinha);
+function criaRecado(recados){
     
-    recado.push(data)
-    localStorage.setItem('recados', JSON.stringify(recado));
-
-    limpar();
-    
-}
-
-
-
-function criaRecado(){
-    let recados =  buscaLocalStorage ();
-    
-    for( const recado of recados){
+    recados.map((recado)=>{
         const linha = gerarRecado(recado);
-        lista.appendChild(linha);
+        return lista.appendChild(linha); 
+    })
     }
-}
-
-const LS=localStorage.getItem('recados')
-const bancoDadosLS=JSON.parse(LS)
-
 
 function limpar() {
     inputDescricao.value = '';
@@ -110,16 +78,14 @@ function gerarRecado (recado) {
     return elementTR;
 }
 
-
 function removerItem () {
     const target = this.id;
     
-    const note  = recado.filter((element)=>{
-
+    const note  = buscaLocalStorage().filter((element)=>{
         return element.id != target
     })
+    
     recado = note
-    // localStorage.clear()
     localStorage.setItem('recados', JSON.stringify(recado));
 
     const elements = document.getElementsByClassName('recado-item');
@@ -130,8 +96,8 @@ function removerItem () {
             return;
         }
     }
-
 }
+
 const idBody=document.getElementById('idBody');
 
 //Função para o botão de editar o recado
@@ -139,16 +105,22 @@ const idBody=document.getElementById('idBody');
 function editarItem(){
     const target   = this.id
     const elements = document.getElementsByClassName('recado-item');
-    
+
+    const inputEditDescricao = document.getElementsByClassName('elementTdDescricao');
+
+    const recadoEditado  = buscaLocalStorage().filter((element)=>{
+    return element.id==target
+})
+
+
     const backGroundModal = document.createElement('div')
     backGroundModal.classList="backGroundModal";
     idBody.appendChild(backGroundModal);
 
-    
     const containerModal    = document.createElement('div');
     containerModal.classList='containerModal'
     backGroundModal.appendChild(containerModal);
-    
+
     const container    = document.createElement('div');
     container.classList='containerDiv';
     containerModal.appendChild(container);
@@ -156,7 +128,7 @@ function editarItem(){
     const btnFecharModal    = document.createElement('button');
     btnFecharModal.classList='btnFecharModal'
     btnFecharModal.innerText='X';
-    
+
     const tituloModal    = document.createElement('h1');
     tituloModal.classList='tituloModal';
     tituloModal.innerText= "Edite seu recado"
@@ -169,45 +141,93 @@ function editarItem(){
 
     const textAreaDescricao    = document.createElement('textarea');
     textAreaDescricao.classList='textAreaDescricao';
+    textAreaDescricao.value = recadoEditado[0].descricao;
 
     const textAreaDetalhamento    = document.createElement('textarea');
     textAreaDetalhamento.classList='textAreaDetalhamento';
+    textAreaDetalhamento.value    =  recadoEditado[0].detalhamento
 
     const btnSalvarEdicao    = document.createElement('button');
     btnSalvarEdicao.classList='btnSalvarEdicao';
     btnSalvarEdicao.innerText="Salvar"
 
-    
-    editeArea.append(textAreaDescricao, textAreaDetalhamento, btnSalvarEdicao);
-
-    const recadoEditado  = recado.filter((element)=>{
-        return element.id==target
-    })
-    
-    
-
-    
-    textAreaDescricao.value    = recadoEditado[0].descricao;
-    textAreaDetalhamento.value = recadoEditado[0].detalhamento;
-        
-
-    
-    
-
     btnSalvarEdicao.addEventListener('click', (event)=>{
-        const inputEditDescricao = document.getElementsByClassName('elementTdDescricao')
         event.preventDefault();
-        textAreaDescricao.value = inputEditDescricao.item
-        console.log(inputEditDescricao.item)
+
+        let data={
+            descricao:null,
+            detalhamento:null,
+            id:null
+        }
+        
+        const todosRecados = buscaLocalStorage();
+        const recadoAtual  = todosRecados.filter((recado)=>{
+        
+            if(recadoEditado[0].descricao!=recado.descricao
+            && recadoEditado[0].detalhamento!=recado.detalhamento){
+                
+                return recado;
+            }
+        })
         
 
-        
+        data.descricao    = textAreaDescricao.value;
+        data.detalhamento =  textAreaDetalhamento.value;
+        data.id           = recadoEditado[0].id;
+
+        recadoEditado[0].descricao    = data.descricao;
+        recadoEditado[0].detalhamento = data.detalhamento;
+
+        textAreaDescricao.value    = data.descricao;
+        textAreaDetalhamento.value = data.detalhamento;
+
+        recadoAtual.push(data);
+        localStorage.clear();
+        recado=recadoAtual;
+
+        localStorage.setItem('recados', JSON.stringify(recadoAtual));
+
+        location.reload();
+
         idBody.removeChild(backGroundModal);
     })
 
+    editeArea.append(textAreaDescricao, textAreaDetalhamento, btnSalvarEdicao);
 
     btnFecharModal.addEventListener('click', ()=>{
         idBody.removeChild(backGroundModal);
     })
 
 }
+
+
+function adicionar() {
+
+    let data={
+        descricao: null,
+        detalhamento: null,
+        id: null
+    }
+
+    data.descricao    = inputDescricao.value;
+    data.detalhamento = inputDetalhamento.value;
+    data.id           = recado.length+1;  //gerarID   ?? gerarID(recado)
+
+    // validando a descrição 
+    if (data.descricao == null || data.descricao == '') {
+        alert("Por favor, informe a descrição do recado.");
+        inputDescricao.focus();
+        return;
+    }
+
+    const novaLinha = gerarRecado(data);
+    lista.appendChild(novaLinha);
+    
+    recado.push(data);
+    
+    localStorage.setItem('recados', JSON.stringify(recado));
+    limpar();
+    
+}
+
+criaRecado(buscaLocalStorage());
