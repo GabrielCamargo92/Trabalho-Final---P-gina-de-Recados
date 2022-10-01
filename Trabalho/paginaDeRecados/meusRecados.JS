@@ -8,10 +8,8 @@ let buscaLocalStorage = () =>{
     return buscaLocalStorage1
 }
 
-let recado = [];
+let recado = buscaLocalStorage();
 
-
-const LS=localStorage.getItem('recados') || []
 
 function criaRecado(recados){
     
@@ -85,8 +83,8 @@ function removerItem () {
         return element.id != target
     })
     
-    recado = note
-    localStorage.setItem('recados', JSON.stringify(recado));
+    
+    localStorage.setItem('recados', JSON.stringify(note));
 
     const elements = document.getElementsByClassName('recado-item');
 
@@ -211,7 +209,7 @@ function adicionar() {
 
     data.descricao    = inputDescricao.value;
     data.detalhamento = inputDetalhamento.value;
-    data.id           = recado.length+1;  //gerarID   ?? gerarID(recado)
+    data.id           = Math.floor(Date.now()/1000); 
 
     // validando a descrição 
     if (data.descricao == null || data.descricao == '') {
